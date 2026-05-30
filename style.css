@@ -1,0 +1,541 @@
+/* --- GLOBAL STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #050811;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+.bg-glow {
+    position: fixed;
+    top: -250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 102, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- NAVIGATION BAR --- */
+nav {
+    background: rgba(5, 8, 17, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.navbar-logo {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(0, 102, 255, 0.7)); 
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #0066ff, #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #a0aec0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0 10px;
+}
+
+.nav-links a:hover {
+    color: #0066ff;
+}
+
+/* Pill Shaped Navbar Buttons */
+.nav-btn {
+    background: rgba(0, 102, 255, 0.1);
+    border: 1px solid rgba(0, 102, 255, 0.3);
+    padding: 8px 22px !important;
+    border-radius: 50px; 
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #0066ff;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
+}
+
+.login-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-btn:hover {
+    background: #ffffff;
+    color: #050811 !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 900;
+    letter-spacing: 5px;
+    background: linear-gradient(135deg, #00ccff 0%, #0066ff 50%, #002288 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(0, 102, 255, 0.4));
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: #cbd5e1;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    font-weight: 300;
+}
+
+/* --- HERO BUTTONS (Pill Shaped) --- */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 36px;
+    border-radius: 50px; 
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #0066ff;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 102, 255, 0.7);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.02);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #0066ff;
+    transform: translateY(-3px);
+}
+
+/* --- FEATURES GRID --- */
+.features, .versions-section, .pricing-section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: linear-gradient(145deg, rgba(10, 18, 36, 0.6) 0%, rgba(5, 9, 18, 0.8) 100%);
+    border: 1px solid rgba(0, 102, 255, 0.05);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    border-color: rgba(0, 102, 255, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.15);
+}
+
+.card-icon {
+    font-size: 40px;
+    color: #00ccff;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.feature-card p {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* --- VERSIONS SECTION --- */
+.versions-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.version-tag {
+    background: rgba(0, 102, 255, 0.02);
+    border: 1px dashed rgba(0, 102, 255, 0.3);
+    padding: 30px 50px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 250px;
+}
+
+.v-num {
+    display: block;
+    font-size: 32px;
+    font-weight: 900;
+    color: #00ccff;
+    margin-bottom: 5px;
+}
+
+.v-desc {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* --- PRICING SECTION --- */
+.pricing-section {
+    text-align: center;
+}
+
+.pricing-subtitle {
+    color: #94a3b8;
+    margin-top: -30px;
+    margin-bottom: 60px;
+}
+
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.price-card {
+    background: rgba(7, 12, 26, 0.8);
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 24px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+}
+
+.premium-card {
+    border: 2px solid #0066ff;
+    background: radial-gradient(circle at top right, rgba(0, 102, 255, 0.08), transparent), #070c1a;
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #0066ff, #00ccff);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.price-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.price {
+    font-size: 48px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.price span {
+    font-size: 16px;
+    color: #64748b;
+    font-weight: 400;
+}
+
+.price-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 40px;
+    flex-grow: 1;
+}
+
+.price-features li {
+    margin-bottom: 15px;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+}
+
+.price-features i {
+    color: #00ffcc;
+}
+
+/* --- ACCESS BUTTONS (Pill Shaped) --- */
+.btn-buy {
+    width: 100%;
+    background: #0066ff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 50px; 
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+.premium-card .btn-buy {
+    background: linear-gradient(45deg, #0066ff, #00ccff);
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
+}
+
+.btn-buy:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.6);
+}
+
+/* --- MODERN LOGIN MODAL SYSTEM --- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 8, 17, 0.85);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(7, 12, 26, 0.95);
+    border: 1px solid rgba(0, 102, 255, 0.15);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 35px rgba(0, 102, 255, 0.1);
+    padding: 45px 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    animation: modalSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #64748b;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-modal:hover {
+    color: #ffffff;
+}
+
+.modal h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.modal-subtitle {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+.auth-providers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Pill Shaped Provider Buttons */
+.provider-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 50px; 
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Discord Pill Brand Color */
+.btn-discord {
+    background: #5865F2;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.25);
+}
+
+.btn-discord:hover {
+    background: #4752C4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.45);
+}
+
+/* Google Pill Brand Color */
+.btn-google {
+    background: #ffffff;
+    color: #1f1f1f;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
+}
+
+.btn-google:hover {
+    background: #f1f1f1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
+}
+
+/* Microsoft Pill Brand Color */
+.btn-microsoft {
+    background: #2f2f2f;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-microsoft:hover {
+    background: #3f3f3f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    color: #475569;
+    font-size: 13px;
+    width: 100%;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes dropIn {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-drop { animation: dropIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fade { animation: fadeIn 1.5s ease forwards; }
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { height: auto; padding-top: 140px; padding-bottom: 60px; }
+}
