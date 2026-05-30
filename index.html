@@ -147,10 +147,19 @@
             }
         }
 
-        // --- 2. OAUTH2 AUTHENTICATION CONFIGURATION ---
-        const REDIRECT_URI = "https://noveira.github.io/"; 
+        // --- 2. OAUTH2 AUTHENTICATION CONFIGURATION (AKILLI LINK TEMİZLEME) ---
+        let cleanUrl = window.location.origin + window.location.pathname;
+        if (cleanUrl.endsWith("index.html")) {
+            cleanUrl = cleanUrl.slice(0, -10); // 'index.html' kısmını linkten uçurur
+        }
+        if (!cleanUrl.endsWith("/")) {
+            cleanUrl += "/"; // Sonunda eğik çizgi olmasını garanti eder
+        }
 
-        // !!! Panellerden alacağın Client ID'leri buraya yapıştıracaksın:
+        // Discord ve Google geliştirici panellerine girmen gereken KESİN link budur:
+        const REDIRECT_URI = cleanUrl; 
+
+        // !!! Geliştirici panellerinden aldığın Client ID'leri buraya tırnak içine yapıştır:
         const DISCORD_CLIENT_ID = "1500286378137882644"; 
         const GOOGLE_CLIENT_ID = "43637872925-flip4srs128522ocq0rj3e5r3bsg3bab.apps.googleusercontent.com";   
 
@@ -184,7 +193,6 @@
             }
         }
 
-        // Giriş Durumuna Göre Navbar'ı Güncelleyen Fonksiyon
         function updateUserUI() {
             const token = localStorage.getItem('noveira_auth_token');
             const loginBtn = document.getElementById('navbarLoginBtn');
@@ -211,7 +219,6 @@
             document.getElementById('loginModal').style.display = 'flex';
         }
 
-        // Modalı Kapatma Fonksiyonu
         function closeLoginModal() {
             document.getElementById('loginModal').style.display = 'none';
         }
