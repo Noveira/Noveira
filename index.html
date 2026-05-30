@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
 
@@ -94,16 +96,25 @@
             </div>
 
             <div class="price-card premium-card">
-                <div class="badge">BEST VALUE</div>
+                <div class="badge" style="background: #ff3366;">TEST MODE</div>
                 <h3>Noveira Lifetime</h3>
-                <div class="price">$25 <span>/ Lifetime</span></div>
+                <div class="price">$0.50 <span>/ Test</span></div>
                 <ul class="price-features">
                     <li><i class="fa-solid fa-check"></i> Permanent Unrestricted Access</li>
                     <li><i class="fa-solid fa-check"></i> Lifetime Future Updates</li>
                     <li><i class="fa-solid fa-check"></i> VIP Discord Role & Channel</li>
                     <li><i class="fa-solid fa-check"></i> Secure HWID Reset Anytime</li>
                 </ul>
-                <button class="btn-buy" onclick="redirectToStripe('LIFETIME')">Purchase Now</button>
+                
+                <button id="lifetimeAuthBtn" class="btn-buy" onclick="openLoginModal()">Login to Purchase</button>
+                
+                <div id="stripeLifetimeContainer" style="display: none; margin-top: 15px;">
+                    <stripe-buy-button
+                        buy-button-id="buy_btn_1Tcto8Ry5C62hCelCKT1PNFA"
+                        publishable-key="pk_test_51TcVH5Ry5C62hCelOrAgbgilD9b2eUibX6DfG1NQEnRUiAOrCXhhkU0NLEza4aDo3M0ciVxbfAd05e08aLdCvw5x00dTzEzHxF"
+                    >
+                    </stripe-buy-button>
+                </div>
             </div>
         </div>
     </section>
@@ -142,21 +153,18 @@
 
             if(plan === 'MONTHLY') {
                 window.location.href = "https://buy.stripe.com/test_3cI00l2SS6kS0DMchYfw400"; 
-            } else if(plan === 'LIFETIME') {
-                window.location.href = "#";
             }
         }
 
-        // --- 2. OAUTH2 AUTHENTICATION CONFIGURATION (AKILLI LINK TEMİZLEME) ---
+        // --- 2. OAUTH2 AUTHENTICATION CONFIGURATION ---
         let cleanUrl = window.location.origin + window.location.pathname;
         if (cleanUrl.endsWith("index.html")) {
-            cleanUrl = cleanUrl.slice(0, -10); // 'index.html' kısmını linkten uçurur
+            cleanUrl = cleanUrl.slice(0, -10);
         }
         if (!cleanUrl.endsWith("/")) {
-            cleanUrl += "/"; // Sonunda eğik çizgi olmasını garanti eder
+            cleanUrl += "/";
         }
 
-        // Discord ve Google geliştirici panellerine girmen gereken KESİN link budur:
         const REDIRECT_URI = cleanUrl; 
 
         // !!! Geliştirici panellerinden aldığın Client ID'leri buraya tırnak içine yapıştır:
@@ -197,19 +205,34 @@
             const token = localStorage.getItem('noveira_auth_token');
             const loginBtn = document.getElementById('navbarLoginBtn');
             
-            if (token && loginBtn) {
-                loginBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Authenticated';
-                loginBtn.style.background = "rgba(0, 255, 204, 0.1)";
-                loginBtn.style.borderColor = "#00ffcc";
-                loginBtn.style.color = "#00ffcc";
+            // Satın alım butonlarının durum kontrolü
+            const lifetimeAuthBtn = document.getElementById('lifetimeAuthBtn');
+            const stripeLifetimeContainer = document.getElementById('stripeLifetimeContainer');
+            
+            if (token) {
+                if (loginBtn) {
+                    loginBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Authenticated';
+                    loginBtn.style.background = "rgba(0, 255, 204, 0.1)";
+                    loginBtn.style.borderColor = "#00ffcc";
+                    loginBtn.style.color = "#00ffcc";
+                    
+                    loginBtn.onclick = function(e) {
+                        e.preventDefault();
+                        if(confirm("Do you want to log out from Noveira?")) {
+                            localStorage.removeItem('noveira_auth_token');
+                            window.location.reload();
+                        }
+                    };
+                }
                 
-                loginBtn.onclick = function(e) {
-                    e.preventDefault();
-                    if(confirm("Do you want to log out from Noveira?")) {
-                        localStorage.removeItem('noveira_auth_token');
-                        window.location.reload();
-                    }
-                };
+                // GİRİŞ YAPILDIYSA: Login butonunu gizle, gerçek Stripe butonunu göster
+                if (lifetimeAuthBtn) lifetimeAuthBtn.style.display = 'none';
+                if (stripeLifetimeContainer) stripeLifetimeContainer.style.display = 'block';
+                
+            } else {
+                // GİRİŞ YAPILMADIYSA: Normal "Login to Purchase" butonunu aktif tut
+                if (lifetimeAuthBtn) lifetimeAuthBtn.style.display = 'block';
+                if (stripeLifetimeContainer) stripeLifetimeContainer.style.display = 'none';
             }
         }
 
